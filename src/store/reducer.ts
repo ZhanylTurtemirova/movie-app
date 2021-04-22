@@ -17,9 +17,9 @@ const initialState: MoviesState = {
       runtime: 0,
     },
   ],
-  filter: "all",
+  filter: "",
   sortBy: "release date",
-  sortDescending: true,
+  sortOrder: "desc",
   isLoading: false,
   error: "",
 };
@@ -30,7 +30,6 @@ const reducer = (
 ): MoviesState => {
   switch (action.type) {
     case actionTypes.SET_MOVIES:
-      console.log("MMM", action?.payload);
       return {
         ...state,
         movies:
@@ -54,6 +53,30 @@ const reducer = (
         ...state,
         isLoading: true,
         error: "",
+      };
+    case actionTypes.SET_MOVIES_FILTER:
+      return {
+        ...state,
+        filter:
+          action?.payload && typeof action.payload === "string"
+            ? action.payload
+            : "",
+      };
+    case actionTypes.SET_MOVIES_SORTBY:
+      return {
+        ...state,
+        sortBy:
+          action?.payload && typeof action.payload === "string"
+            ? action.payload
+            : "",
+      };
+    case actionTypes.SET_MOVIES_ORDER:
+      return {
+        ...state,
+        sortOrder:
+          action?.payload && typeof action.payload === "string"
+            ? action.payload
+            : "",
       };
   }
   return state;

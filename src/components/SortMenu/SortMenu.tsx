@@ -8,17 +8,25 @@ import {
   SortWrapper,
   SortDropdown,
   SortMenuWrapper,
-  ResultWrapper,
   Wrapper,
   StyledBg,
-  TriangleButtonWrapper,
+  TriangleDownButtonWrapper,
+  TriangleUpButtonWrapper,
 } from "./styles/SortMenu.styles";
 
 interface SortMenuProps {
-  activeClickProps: (item: string) => void;
+  filter: string;
+  sortBy: string;
+  sortOrder: string;
+  setMoviesFilter: (item: string) => void;
+  setMoviesSortBy: (item: string) => void;
+  setMoviesOrder: (item: string) => void;
 }
 export const SortMenu: FC<SortMenuProps> = ({
-  activeClickProps,
+  filter,
+  sortBy,
+  setMoviesFilter,
+  setMoviesSortBy,
 }): ReactElement => {
   const menuItems: string[] = [
     "all",
@@ -27,16 +35,25 @@ export const SortMenu: FC<SortMenuProps> = ({
     "adventure",
     "crime",
   ];
-  const sortItems: string[] = ["realise date", "rating"];
-  const [activeItem, setActiveItem] = useState<string>("all");
+  const sortItems: string[] = ["realise date", "rating", "id"];
+  const [activeItem, setActiveItem] = useState<string>(filter || "all");
   const [sortedOption, setSortedOption] = useState<string>(sortItems[0]);
-  const [count, setCount] = useState<number>(0);
   const [isShowed, setIsShowed] = useState<boolean>(false);
+  const [sortOrder, setSortOrder] = useState<string>("desc");
   const activeClickHandler = (item: string) => {
-    activeClickProps(item);
+    setMoviesFilter(item);
     setActiveItem(item);
   };
-  useEffect(() => {}, [isShowed, activeItem]);
+  const setSortedHandler = (item: string) => {
+    setMoviesSortBy(item);
+    setSortedOption(item);
+  };
+  const setOrderHandler = (item: string) => {
+    setMoviesSortBy(item);
+    setSortOrder(item);
+  };
+
+  useEffect(() => {}, [isShowed, activeItem, sortedOption, sortOrder]);
 
   return (
     <StyledBg>
@@ -45,9 +62,7 @@ export const SortMenu: FC<SortMenuProps> = ({
           <Menu>
             {menuItems.map((item, index) => (
               <MenuItem
-                onClick={() => {
-                  activeClickHandler(item);
-                }}
+                onClick={() => activeClickHandler(item)}
                 isActive={false}
               >
                 {item}
@@ -55,31 +70,32 @@ export const SortMenu: FC<SortMenuProps> = ({
             ))}
           </Menu>
           <SortWrapper>
-            <SortTitle>Sort By</SortTitle>
-            <SortItem
-              onClick={() => {
-                setIsShowed(!isShowed);
-              }}
-            >
+            <SortTitle onClick={() => setIsShowed(!isShowed)}>
+              Sort By
+            </SortTitle>
+            <SortItem onClick={() => setIsShowed(!isShowed)}>
               {sortedOption}
             </SortItem>
-            <TriangleButtonWrapper
-              onClick={() => {
-                setIsShowed(!isShowed);
-              }}
-            >
-              <TriangleButton />
-            </TriangleButtonWrapper>
-            <SortDropdown isShowed={isShowed}>
-              {sortItems.map((item) => (
-                <SortItem onClick={() => setSortedOption(item)}>
-                  {item}
-                </SortItem>
-              ))}
-            </SortDropdown>
+            {sortOrder === "desc" ? (
+              <TriangleDownButtonWrapper onClick={() => setOrderHandler("asc")}>
+                <TriangleButton />
+              </TriangleDownButtonWrapper>
+            ) : (
+              <TriangleUpButtonWrapper onClick={() => setOrderHandler("desc")}>
+                <TriangleButton />
+              </TriangleUpButtonWrapper>
+            )}
+            {isShowed && (
+              <SortDropdown>
+                {sortItems.map((item) => (
+                  <SortItem onClick={() => setSortedHandler(item)}>
+                    {item}
+                  </SortItem>
+                ))}
+              </SortDropdown>
+            )}
           </SortWrapper>
         </SortMenuWrapper>
-        <ResultWrapper>{count} movies found </ResultWrapper>
       </Wrapper>
     </StyledBg>
   );

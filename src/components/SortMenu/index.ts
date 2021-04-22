@@ -1,1 +1,1 @@
-export { SortMenu as default } from "./SortMenu";
+export { SortMenuContainer as default } from "./SortMenuContainer";

@@ -19,7 +19,7 @@ type MoviesState = {
   error: string;
   filter: string;
   sortBy: string;
-  sortDescending: boolean;
+  sortOrder: string;
 };
 
 type MoviesAction = {

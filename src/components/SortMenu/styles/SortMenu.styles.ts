@@ -1,21 +1,10 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const Menu = styled.div`
   display: flex;
 `;
-
-export const SortTitle = styled.div`
+export const SortDropdown = styled.div`
   text-transform: uppercase;
-  margin-right: 20px;
-  cursor: pointer;
-`;
-
-export const SortDropdown = styled.div<{ isShowed: boolean }>`
-  text-transform: uppercase;
-  display: ${(isShowed) => {
-    return isShowed ? "block" : "none";
-  }};
-  display: none;
   position: absolute;
   top: 60px;
   right: 0;
@@ -23,6 +12,15 @@ export const SortDropdown = styled.div<{ isShowed: boolean }>`
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  border-radius: 4px;
+  color: var(--mainDark);
+`;
+export const SortTitle = styled.div`
+  text-transform: uppercase;
+  margin-right: 20px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1000;
 `;
 
 export const SortWrapper = styled.div`
@@ -56,17 +54,13 @@ export const SortItem = styled.div`
   cursor: pointer;
 `;
 
-export const ResultWrapper = styled.div`
-  font-size: 18px;
-  padding: 20px 0;
-`;
-
-export const TriangleButtonWrapper = styled.div`
+export const TriangleDownButtonWrapper = styled.div`
   transition-duration: 0.5s;
   transition-property: transform;
-  &:hover {
-    transform: rotate(180deg);
-  }
+  cursor: pointer;
+`;
+export const TriangleUpButtonWrapper = styled(TriangleDownButtonWrapper)`
+  transform: rotate(180deg);
 `;
 
 export const TriangleButton = styled.div`

@@ -1,6 +1,6 @@
 import { api } from "../api";
 import { AxiosResponse } from "axios";
-const BASE_API = "http://localhost:4040/movies";
+const BASE_API = "http://localhost:4000/movies";
 
 export const getMovies = (
   params?: Record<string, string | boolean | number>

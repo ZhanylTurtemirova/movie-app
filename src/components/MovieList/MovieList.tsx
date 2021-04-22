@@ -1,11 +1,14 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
 import MovieItem from "./MovieItem/MovieItem";
-import { ListWrapper } from "./MovieList.styles";
+import { ListWrapper, ResultWrapper } from "./MovieList.styles";
 
 interface MovieListInterface {
   movies: IMovie[];
   error: string;
   isLoading: boolean;
+  filter: string;
+  sortBy: string;
+  sortOrder: string;
   getMoviesRequest: (
     params?: Record<string, string | number | boolean> | undefined
   ) => Promise<void>;
@@ -15,11 +18,14 @@ const MovieList: FC<MovieListInterface> = ({
   getMoviesRequest,
   movies,
   error,
+  filter,
+  sortBy,
+  sortOrder,
   isLoading,
 }): React.ReactElement => {
   useEffect(() => {
-    getMoviesRequest();
-  }, []);
+    getMoviesRequest({ filter, sortBy, sortOrder });
+  }, [filter, getMoviesRequest, sortBy, sortOrder]);
 
   if (!movies || movies.length === 0) {
     return <div>No movies found</div>;
@@ -32,10 +38,13 @@ const MovieList: FC<MovieListInterface> = ({
   }
 
   return (
-    <ListWrapper>
-      {Array.isArray(movies) &&
-        movies.map((item) => <MovieItem movie={item} />)}
-    </ListWrapper>
+    <>
+      <ResultWrapper>{movies.length || 0} movies found </ResultWrapper>
+      <ListWrapper>
+        {Array.isArray(movies) &&
+          movies.map((item) => <MovieItem movie={item} />)}
+      </ListWrapper>
+    </>
   );
 };
 export default MovieList;

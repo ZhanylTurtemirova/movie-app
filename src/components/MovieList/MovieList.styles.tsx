@@ -8,3 +8,8 @@ export const ListWrapper = styled.div`
   margin: 10px auto;
   background: var(--mainDark);
 `;
+
+export const ResultWrapper = styled.div`
+  font-size: 18px;
+  padding: 20px 0;
+`;
