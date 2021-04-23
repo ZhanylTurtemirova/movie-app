@@ -15,8 +15,24 @@ import {
 import Logo from "../Logo";
 import AddMovie from "../AddMovie";
 
-export const SearchBanner: FC = (): ReactElement => {
+interface SearchBannerProps {
+  search: string;
+  successMsg: string;
+  error: string;
+  isLoading: boolean;
+  setMoviesSearch: any;
+  addMovieRequest: any;
+}
+export const SearchBanner: FC<SearchBannerProps> = ({
+  search,
+  isLoading,
+  error,
+  successMsg,
+  setMoviesSearch,
+  addMovieRequest,
+}: SearchBannerProps): ReactElement => {
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+  const [searchValue, setSearchValue] = useState<string>(search);
   return (
     <>
       <SearchWrapper>
@@ -32,8 +48,15 @@ export const SearchBanner: FC = (): ReactElement => {
             <SearchContent>
               <SearchTitle>Find your movie</SearchTitle>
               <SearchInputWrapper>
-                <SearchInput placeholder={"What do you want to watch?"} />
-                <SearchButton>Search</SearchButton>
+                <SearchInput
+                  onChange={(e) => {
+                    setSearchValue(e.target.value);
+                  }}
+                  placeholder={"What do you want to watch?"}
+                />
+                <SearchButton onClick={() => setMoviesSearch(searchValue)}>
+                  Search
+                </SearchButton>
               </SearchInputWrapper>
             </SearchContent>
           </SearchBannerMiddle>
@@ -41,6 +64,10 @@ export const SearchBanner: FC = (): ReactElement => {
       </SearchWrapper>
       {isModalOpened && (
         <AddMovie
+          isLoading={isLoading}
+          error={error}
+          successMsg={successMsg}
+          addMovie={addMovieRequest}
           onClose={() => setIsModalOpened(false)}
           isShowed={isModalOpened}
         />

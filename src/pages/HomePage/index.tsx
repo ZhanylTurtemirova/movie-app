@@ -1,5 +1,5 @@
 import React from "react";
-import SearchBanner from "../../components/SearchBanner";
+import SearchBannerContainer from "../../components/SearchBanner";
 import SortMenuContainer from "../../components/SortMenu";
 import MovieListContainer from "../../components/MovieList/MovieListContainer";
 import Footer from "../../components/Footer";
@@ -10,7 +10,7 @@ export default class HomePage extends React.Component {
     return (
       <>
         <ErrorBoundary hasError={false}>
-          <SearchBanner />
+          <SearchBannerContainer />
           <SortMenuContainer />
           <MovieListContainer />
         </ErrorBoundary>

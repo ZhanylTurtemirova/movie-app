@@ -20,11 +20,13 @@ type MoviesState = {
   filter: string;
   sortBy: string;
   sortOrder: string;
+  search: string;
+  successMsg: string;
 };
 
 type MoviesAction = {
   type: string;
-  payload?: IMovie[] | string;
+  payload?: IMovie[] | string | IMovie;
 };
 
 type DispatchType = (args: MoviesAction) => MoviesAction | void | string;

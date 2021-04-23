@@ -6,6 +6,7 @@ import {
   selectFilter,
   selectSortBy,
   selectSortOrder,
+  selectSearchValue,
 } from "../../store/selectors";
 import { getMoviesRequest } from "../../store/actionCreators";
 import MovieList from "./MovieList";
@@ -18,6 +19,7 @@ export const MovieListContainer = connect(
     filter: selectFilter(state),
     sortBy: selectSortBy(state),
     sortOrder: selectSortOrder(state),
+    search: selectSearchValue(state),
   }),
   {
     getMoviesRequest,

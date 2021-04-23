@@ -1,6 +1,41 @@
 import * as actionTypes from "./actionTypes";
-import { getMovies } from "./services";
+import { getMovies, addMovie } from "./services";
 
+export const addMovieError = (err: string): MoviesAction => ({
+  type: actionTypes.ADD_MOVIE_ERROR,
+  payload: err,
+});
+export const addMovieLoading = (): MoviesAction => ({
+  type: actionTypes.ADD_MOVIE_LOADING,
+});
+export const addMovieSuccess = (): MoviesAction => ({
+  type: actionTypes.ADD_MOVIE_SUCCESS,
+});
+
+export const addMovieRequest = (movieForm: any) => (
+  dispatch: any
+): Promise<void> => {
+  const movie = {
+    vote_average: 0,
+    vote_count: 9,
+    budget: 0,
+    revenue: 0,
+    ...movieForm,
+  };
+  addMovieLoading();
+  return addMovie(movie)
+    .then(() => {
+      addMovieSuccess();
+      dispatch(getMoviesRequest());
+    })
+    .catch((error) => {
+      addMovieError(error.toString());
+    });
+};
+export const setMoviesSearch = (search: string): MoviesAction => ({
+  type: actionTypes.SET_MOVIES_SEARCH,
+  payload: search,
+});
 export const setMoviesFilter = (filterBy: string): MoviesAction => ({
   type: actionTypes.SET_MOVIES_FILTER,
   payload: filterBy,

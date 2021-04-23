@@ -9,6 +9,7 @@ interface MovieListInterface {
   filter: string;
   sortBy: string;
   sortOrder: string;
+  search: string;
   getMoviesRequest: (
     params?: Record<string, string | number | boolean> | undefined
   ) => Promise<void>;
@@ -22,10 +23,11 @@ const MovieList: FC<MovieListInterface> = ({
   sortBy,
   sortOrder,
   isLoading,
+  search,
 }): React.ReactElement => {
   useEffect(() => {
-    getMoviesRequest({ filter, sortBy, sortOrder });
-  }, [filter, getMoviesRequest, sortBy, sortOrder]);
+    getMoviesRequest({ filter, sortBy, sortOrder, search });
+  }, [filter, getMoviesRequest, sortBy, sortOrder, search]);
 
   if (!movies || movies.length === 0) {
     return <div>No movies found</div>;

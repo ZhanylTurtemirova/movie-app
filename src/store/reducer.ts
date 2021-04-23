@@ -22,6 +22,8 @@ const initialState: MoviesState = {
   sortOrder: "desc",
   isLoading: false,
   error: "",
+  search: "",
+  successMsg: "",
 };
 
 const reducer = (
@@ -77,6 +79,34 @@ const reducer = (
           action?.payload && typeof action.payload === "string"
             ? action.payload
             : "",
+      };
+    case actionTypes.SET_MOVIES_SEARCH:
+      return {
+        ...state,
+        search:
+          action?.payload && typeof action.payload === "string"
+            ? action.payload
+            : "",
+      };
+    case actionTypes.ADD_MOVIE_ERROR:
+      return {
+        ...state,
+        error:
+          action?.payload && typeof action.payload === "string"
+            ? action.payload
+            : "",
+      };
+    case actionTypes.ADD_MOVIE_LOADING:
+      return {
+        ...state,
+        isLoading: true,
+        error: "",
+      };
+    case actionTypes.ADD_MOVIE_SUCCESS:
+      return {
+        ...state,
+        isLoading: true,
+        successMsg: "The movie has been added successfully",
       };
   }
   return state;

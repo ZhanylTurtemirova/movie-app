@@ -1,1 +1,1 @@
-export { SearchBanner as default } from "./SearchBanner";
+export { SearchBannerContainer as default } from "./SearchBannerContainer";
