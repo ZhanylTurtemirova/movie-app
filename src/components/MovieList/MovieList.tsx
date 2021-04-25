@@ -26,7 +26,7 @@ const MovieList: FC<MovieListInterface> = ({
   search,
 }): React.ReactElement => {
   useEffect(() => {
-    getMoviesRequest({ filter, sortBy, sortOrder, search });
+    getMoviesRequest({ filter, sortBy, sortOrder, searchBy: "title", search });
   }, [filter, getMoviesRequest, sortBy, sortOrder, search]);
 
   if (!movies || movies.length === 0) {

@@ -5,7 +5,11 @@ import {
   selectLoading,
   selectSuccessMsg,
 } from "../../store/selectors";
-import { setMoviesSearch, addMovieRequest } from "../../store/actionCreators";
+import {
+  setMoviesSearch,
+  addMovieRequest,
+  getMoviesRequest,
+} from "../../store/actionCreators";
 import { SearchBanner } from "./SearchBanner";
 
 export const SearchBannerContainer = connect(
@@ -15,7 +19,7 @@ export const SearchBannerContainer = connect(
     error: selectError(state),
     isLoading: selectLoading(state),
   }),
-  { setMoviesSearch, addMovieRequest }
+  { setMoviesSearch, addMovieRequest, getMoviesRequest }
 )(SearchBanner);
 
 export default SearchBannerContainer;

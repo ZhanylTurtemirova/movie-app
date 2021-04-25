@@ -1,4 +1,4 @@
-import React, { ReactElement, FC, useState } from "react";
+import React, { ReactElement, FC, useState, useEffect } from "react";
 import {
   SearchWrapper,
   AddButton,
@@ -14,6 +14,7 @@ import {
 } from "./styles/SearchBanner.styles";
 import Logo from "../Logo";
 import AddMovie from "../AddMovie";
+import { useHistory } from "react-router-dom";
 
 interface SearchBannerProps {
   search: string;
@@ -33,6 +34,16 @@ export const SearchBanner: FC<SearchBannerProps> = ({
 }: SearchBannerProps): ReactElement => {
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>(search);
+  const searchInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+  const history = useHistory();
+
+  const searchClickHandler = (e: any) => {
+    e.preventDefault();
+    setMoviesSearch(searchValue);
+  };
+
   return (
     <>
       <SearchWrapper>
@@ -50,11 +61,11 @@ export const SearchBanner: FC<SearchBannerProps> = ({
               <SearchInputWrapper>
                 <SearchInput
                   onChange={(e) => {
-                    setSearchValue(e.target.value);
+                    searchInputHandler(e);
                   }}
                   placeholder={"What do you want to watch?"}
                 />
-                <SearchButton onClick={() => setMoviesSearch(searchValue)}>
+                <SearchButton onClick={(e) => searchClickHandler(e)}>
                   Search
                 </SearchButton>
               </SearchInputWrapper>

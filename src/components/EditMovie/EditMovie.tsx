@@ -60,13 +60,12 @@ export const EditMovie: FC<EditMovieProps> = ({
           onChange={(e) => setMovieUrl(e.target.value)}
           placeholder={"Movie URL here"}
         />
-        <Select
+        {/* <Select
           name="genre"
           value={genre}
           options={Options}
           onChange={(e) => setGenre(e.target.value)}
-          label={"Select Genre"}
-        />
+        /> */}
         <Input
           label="Overview"
           type="text"

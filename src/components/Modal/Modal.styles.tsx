@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const ModalWrapper = styled.div<{ isHidden: boolean }>`
-  display: block;
   position: fixed;
   left: 0;
   top: 0;
@@ -16,10 +15,12 @@ export const ModalWrapper = styled.div<{ isHidden: boolean }>`
 `;
 export const ModalContent = styled.div`
   background-color: var(--mainDark);
-  margin: auto;
   padding: 40px;
   border-radius: 4px;
   width: 60%;
+  height: 100%;
+  margin: auto;
+  margin-top: 10px;
 `;
 export const ModalTitle = styled.h3`
   text-align: left;

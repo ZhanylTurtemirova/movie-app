@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledButton = styled.div<{ isFilled?: boolean }>`
+export const StyledButton = styled.button<{ isFilled?: boolean }>`
   background: ${({ isFilled }) => (isFilled ? "var(--mainRed)" : "none")};
   border: 2px solid var(--mainRed);
   padding: 15px 25px;
@@ -8,4 +8,5 @@ export const StyledButton = styled.div<{ isFilled?: boolean }>`
   border-radius: 4px;
   margin-right: 10px;
   cursor: pointer;
+  color: var(--mainWhite);
 `;

@@ -1,12 +1,18 @@
 import React, { ReactElement, FC, useCallback, useMemo } from "react";
-import { StyledForm, ButtonsWrapper } from "./AddMovie.styles";
+import {
+  StyledForm,
+  StyledSelect,
+  StyledOption,
+  ButtonsWrapper,
+  CloseButton,
+} from "./AddMovie.styles";
 import Input from "../Input";
 import Button from "../Button";
-import Select from "../Select";
 import Modal from "../Modal";
 import { Form, Formik } from "formik";
 import { FieldWrapper } from "../FieldWrapper/FieldWrapper";
 import { AddMovieSchema } from "./AddMovie.validation";
+import Select from "../Select";
 
 type AddMovieProps = {
   successMsg: string;
@@ -17,7 +23,19 @@ type AddMovieProps = {
   isShowed: boolean;
 };
 
-const Options: string[] = ["Action", "Adventure", "Horror"];
+const Options: string[] = [
+  "Action",
+  "Adventure",
+  "Horror",
+  "Crime",
+  "Documentary",
+  "Comedy",
+  "Fantasy",
+  "Animation",
+  "Science Fiction",
+  "Drama",
+];
+
 export const AddMovie: FC<AddMovieProps> = ({
   onClose: handleClose,
   isShowed,
@@ -38,24 +56,28 @@ export const AddMovie: FC<AddMovieProps> = ({
       overview: "No overview",
       budget: 1,
       revenue: 1,
-      genres: ["", ""],
+      genres: ["all"],
       runtime: 0,
     }),
     []
   );
 
+  const closeHandler = (e: any) => {
+    handleClose();
+  };
   const handleSubmit = useCallback(
     async (values) => {
+      console.log("values", values);
       try {
         const val = { ...movieInitialValues, ...values };
         await addMovie(val);
         alert({ successMsg });
         handleClose();
-      } catch (err) {
-        alert({ err });
+      } catch (e) {
+        alert({ error });
       }
     },
-    [addMovie, handleClose, movieInitialValues, successMsg]
+    [addMovie, error, handleClose, movieInitialValues, successMsg]
   );
   return (
     <Modal isHidden={isShowed} onClose={handleClose} title="Add Movie">
@@ -78,18 +100,22 @@ export const AddMovie: FC<AddMovieProps> = ({
                 {(props: any) => <Input type="string" {...props} />}
               </FieldWrapper>
 
-              <FieldWrapper name="genres" label="Movie url" required>
-                {(props: any) => <Select options={Options} {...props} />}
+              <FieldWrapper name="genres" label="Genres" required>
+                {(props: any) => {
+                  return <Select name={"genres"} options={Options} />;
+                }}
               </FieldWrapper>
               <FieldWrapper name="overview" label="Overview" required>
                 {(props: any) => <Input type="string" {...props} />}
               </FieldWrapper>
               <FieldWrapper name="runtime" label="Runtime" required>
-                {(props: any) => <Input type="number" {...props} />}
+                {(props: any) => <Input type="number" min={0} {...props} />}
               </FieldWrapper>
               <ButtonsWrapper>
-                <Button text="Reset" />
-                <Button type="submit" isFilled text="Submit" />
+                <CloseButton type="button" onClick={closeHandler}>
+                  Reset
+                </CloseButton>
+                <Button isFilled text="Submit" />
               </ButtonsWrapper>
             </StyledForm>
           </Form>

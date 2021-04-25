@@ -89,6 +89,7 @@ const reducer = (
             : "",
       };
     case actionTypes.ADD_MOVIE_ERROR:
+      console.log("!!!!", action.payload);
       return {
         ...state,
         error:

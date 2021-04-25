@@ -14,6 +14,9 @@ export const ErrorMessage = styled.p`
 `;
 
 export const Label = styled.label`
-  font-size: 20px;
-  margin-bottom: 10px;
+  color: var(--mainRed);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 14px;
+  padding-bottom: 10px;
 `;
