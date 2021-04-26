@@ -1,5 +1,5 @@
 interface IMovie {
-  id?: number;
+  id: number;
   title: "";
   release_date: string;
   poster_path: "";

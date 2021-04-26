@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledInput = styled.input`
-  width: 100%;
+  width: 95%;
   font-size: 16px;
   font-family: inherit;
   padding: 20px 15px;

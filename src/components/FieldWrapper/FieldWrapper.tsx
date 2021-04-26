@@ -4,7 +4,6 @@ import { FieldWrapperProps } from "./FieldWrapper.types";
 import { useFieldWrapper } from "./useFieldWrapper";
 
 export const FieldWrapper: React.FC<FieldWrapperProps> = ({
-  id: userDefinedId,
   label,
   name,
   children,
@@ -13,7 +12,6 @@ export const FieldWrapper: React.FC<FieldWrapperProps> = ({
   ...props
 }) => {
   const {
-    id,
     field,
     hasError,
     messageId: msgId,
@@ -23,12 +21,11 @@ export const FieldWrapper: React.FC<FieldWrapperProps> = ({
     name,
     messageId,
     required,
-    id: userDefinedId,
   });
 
   return (
     <Wrapper {...props}>
-      <Label htmlFor={id}>{label}</Label>
+      <Label>{label}</Label>
       {children({
         ...field,
         ...attrs,

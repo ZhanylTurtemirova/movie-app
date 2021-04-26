@@ -1,1 +1,1 @@
-export { AddMovie as default } from "./AddMovie";
+export { AddMovieContainer as default } from "./AddMovieContainer";

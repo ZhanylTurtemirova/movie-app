@@ -1,4 +1,4 @@
-import React, { ReactElement, FC, useState, useEffect } from "react";
+import React, { ReactElement, FC, useState } from "react";
 import {
   SearchWrapper,
   AddButton,
@@ -13,31 +13,22 @@ import {
   SearchBannerMiddle,
 } from "./styles/SearchBanner.styles";
 import Logo from "../Logo";
-import AddMovie from "../AddMovie";
+import AddMovieContainer from "../AddMovie";
 import { useHistory } from "react-router-dom";
 
 interface SearchBannerProps {
   search: string;
-  successMsg: string;
-  error: string;
-  isLoading: boolean;
   setMoviesSearch: any;
-  addMovieRequest: any;
 }
 export const SearchBanner: FC<SearchBannerProps> = ({
   search,
-  isLoading,
-  error,
-  successMsg,
   setMoviesSearch,
-  addMovieRequest,
 }: SearchBannerProps): ReactElement => {
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>(search);
   const searchInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
-  const history = useHistory();
 
   const searchClickHandler = (e: any) => {
     e.preventDefault();
@@ -74,11 +65,8 @@ export const SearchBanner: FC<SearchBannerProps> = ({
         </SearchContentWrapper>
       </SearchWrapper>
       {isModalOpened && (
-        <AddMovie
-          isLoading={isLoading}
-          error={error}
-          successMsg={successMsg}
-          addMovie={addMovieRequest}
+        <AddMovieContainer
+          title={"Add Movie"}
           onClose={() => setIsModalOpened(false)}
           isShowed={isModalOpened}
         />

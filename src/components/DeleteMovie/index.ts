@@ -1,1 +1,1 @@
-export { DeleteMovie as default } from "./DeleteMovie";
+export { DeleteMovieContainer as default } from "./DeleteMovieContainer";

@@ -89,7 +89,6 @@ const reducer = (
             : "",
       };
     case actionTypes.ADD_MOVIE_ERROR:
-      console.log("!!!!", action.payload);
       return {
         ...state,
         error:
@@ -108,6 +107,46 @@ const reducer = (
         ...state,
         isLoading: true,
         successMsg: "The movie has been added successfully",
+      };
+    case actionTypes.DELETE_MOVIE_ERROR:
+      return {
+        ...state,
+        error:
+          action?.payload && typeof action.payload === "string"
+            ? action.payload
+            : "",
+      };
+    case actionTypes.DELETE_MOVIE_LOADING:
+      return {
+        ...state,
+        isLoading: true,
+        error: "",
+      };
+    case actionTypes.DELETE_MOVIE_SUCCESS:
+      return {
+        ...state,
+        isLoading: true,
+        successMsg: "The movie has been deleted successfully",
+      };
+    case actionTypes.EDIT_MOVIE_ERROR:
+      return {
+        ...state,
+        error:
+          action?.payload && typeof action.payload === "string"
+            ? action.payload
+            : "",
+      };
+    case actionTypes.EDIT_MOVIE_LOADING:
+      return {
+        ...state,
+        isLoading: true,
+        error: "",
+      };
+    case actionTypes.EDIT_MOVIE_SUCCESS:
+      return {
+        ...state,
+        isLoading: true,
+        successMsg: "The movie has been edited successfully",
       };
   }
   return state;

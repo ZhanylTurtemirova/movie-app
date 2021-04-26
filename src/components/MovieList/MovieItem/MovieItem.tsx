@@ -14,12 +14,12 @@ import {
   MenuItem,
 } from "./MovieItem.styles";
 import menuImg from "../../../assets/menu.png";
-import EditMovie from "../../EditMovie";
-import DeleteMovie from "../../DeleteMovie";
+import AddMovieContainer from "../../AddMovie";
+import DeleteMovieContainer from "../../DeleteMovie";
 
 interface MovieItemInterface {
   movie: {
-    id?: number;
+    id: number;
     title: string;
     tagline: string;
     vote_average: number;
@@ -66,16 +66,17 @@ const MovieItem: FC<React.PropsWithChildren<MovieItemInterface>> = ({
         </MovieDescription>
       </MovieWrapper>
       {isDeleteShown && (
-        <DeleteMovie
+        <DeleteMovieContainer
           isShowed={isDeleteShown}
-          movieId={movie.title}
+          movieId={movie.id}
           onClose={() => setIsDeleteShown(false)}
         />
       )}
       {isEditShown && (
-        <EditMovie
+        <AddMovieContainer
+          title="Edit Movie"
           isShowed={isEditShown}
-          movie={movie}
+          initialValues={movie}
           onClose={() => setIsEditShown(false)}
         />
       )}

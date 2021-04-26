@@ -1,11 +1,5 @@
 import React, { ReactElement, FC, useCallback, useMemo } from "react";
-import {
-  StyledForm,
-  StyledSelect,
-  StyledOption,
-  ButtonsWrapper,
-  CloseButton,
-} from "./AddMovie.styles";
+import { StyledForm, ButtonsWrapper, CloseButton } from "./AddMovie.styles";
 import Input from "../Input";
 import Button from "../Button";
 import Modal from "../Modal";
@@ -15,12 +9,15 @@ import { AddMovieSchema } from "./AddMovie.validation";
 import Select from "../Select";
 
 type AddMovieProps = {
+  title: string;
   successMsg: string;
   error: string;
   isLoading: boolean;
-  addMovie: any;
+  addMovieRequest: any;
+  editMovieRequest: any;
   onClose: () => void;
   isShowed: boolean;
+  initialValues?: any;
 };
 
 const Options: string[] = [
@@ -42,24 +39,30 @@ export const AddMovie: FC<AddMovieProps> = ({
   successMsg,
   error,
   isLoading,
-  addMovie,
+  addMovieRequest,
+  editMovieRequest,
+  title,
+  initialValues,
 }): ReactElement => {
   const movieInitialValues = useMemo(
-    () => ({
-      id: undefined,
-      title: "",
-      tagline: "No tagline",
-      vote_average: 1,
-      vote_count: 1,
-      release_date: "",
-      poster_path: "",
-      overview: "No overview",
-      budget: 1,
-      revenue: 1,
-      genres: ["all"],
-      runtime: 0,
-    }),
-    []
+    () =>
+      initialValues
+        ? initialValues
+        : {
+            id: undefined,
+            title: "",
+            tagline: "No tagline",
+            vote_average: 1,
+            vote_count: 1,
+            release_date: "",
+            poster_path: "",
+            overview: "No overview",
+            budget: 1,
+            revenue: 1,
+            genres: ["all"],
+            runtime: 0,
+          },
+    [initialValues]
   );
 
   const closeHandler = (e: any) => {
@@ -67,20 +70,26 @@ export const AddMovie: FC<AddMovieProps> = ({
   };
   const handleSubmit = useCallback(
     async (values) => {
-      console.log("values", values);
       try {
         const val = { ...movieInitialValues, ...values };
-        await addMovie(val);
-        alert({ successMsg });
+        if (initialValues) {
+          await editMovieRequest(val);
+        } else {
+          await addMovieRequest(val);
+        }
         handleClose();
-      } catch (e) {
-        alert({ error });
-      }
+      } catch (e) {}
     },
-    [addMovie, error, handleClose, movieInitialValues, successMsg]
+    [
+      addMovieRequest,
+      editMovieRequest,
+      handleClose,
+      initialValues,
+      movieInitialValues,
+    ]
   );
   return (
-    <Modal isHidden={isShowed} onClose={handleClose} title="Add Movie">
+    <Modal isHidden={isShowed} onClose={handleClose} title={title}>
       <Formik
         initialValues={movieInitialValues}
         onSubmit={handleSubmit}
