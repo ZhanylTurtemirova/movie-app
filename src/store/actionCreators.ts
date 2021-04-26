@@ -80,7 +80,7 @@ export const deleteMovieRequest = (movieVal: any) => (
   dispatch: any
 ): Promise<void> => {
   deleteMovieLoading();
-  return deleteMovie(movieVal.id)
+  return deleteMovie(movieVal)
     .then(() => {
       alert("Successfully delited!");
       deleteMovieSuccess();
