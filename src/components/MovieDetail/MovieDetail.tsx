@@ -21,33 +21,23 @@ import {
 import searchImg from "../../assets/red-search.webp";
 import Logo from "../Logo";
 
-interface MovieDetailInterface {
-  movie: {
-    id: string;
-    movieUrl: string;
-    overview: string;
-    runTime: string;
-    movieTitle: string;
-    genre: string[];
-    releaseDate: string;
-    imgUrl: string;
-    rate?: number;
-    subtitle?: string;
-  };
-}
+type MovieDetailProp = {
+  movie: IMovie;
+  error: string;
+  isLoading: boolean;
+};
 
-const MovieDetail: FC<React.PropsWithChildren<MovieDetailInterface>> = ({
+const MovieDetail: FC<React.PropsWithChildren<MovieDetailProp>> = ({
   movie,
-  movie: {
-    imgUrl,
-    rate = "4",
-    subtitle = "Oscar winning movie",
-    movieTitle,
-    runTime,
-    overview,
-    releaseDate,
-  },
+  error,
+  isLoading,
 }): ReactElement => {
+  if (isLoading) {
+    return <div>loading</div>;
+  }
+  if (error) {
+    return <div>{error}</div>;
+  }
   return (
     <Wrapper>
       <BgWrapper />
@@ -59,17 +49,17 @@ const MovieDetail: FC<React.PropsWithChildren<MovieDetailInterface>> = ({
           </SearchWrapper>
         </TopWrapper>
         <MovieWrapper>
-          <MoviePoster src={imgUrl} />
+          <MoviePoster src={movie.poster_path} />
           <MovieDescription>
             <MovieTilte>
-              <Title>{movieTitle}</Title>
-              <Rate>{rate}</Rate>
+              <Title>{movie.title}</Title>
+              <Rate>{movie.vote_average}</Rate>
             </MovieTilte>
-            <MovieSubtitle>{subtitle}</MovieSubtitle>
+            <MovieSubtitle>{movie.tagline}</MovieSubtitle>
             <MovieDateTime>
-              <Date>{releaseDate}</Date> <Time>{runTime}</Time>
+              <Date>{movie.release_date}</Date> <Time>{movie.runtime}</Time>
             </MovieDateTime>
-            <MovieOverview>{overview}</MovieOverview>
+            <MovieOverview>{movie.overview}</MovieOverview>
           </MovieDescription>
         </MovieWrapper>
       </MovieContent>

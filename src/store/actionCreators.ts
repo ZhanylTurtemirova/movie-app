@@ -1,6 +1,19 @@
 import * as actionTypes from "./actionTypes";
-import { getMovies, addMovie, editMovie, deleteMovie } from "./services";
+import {
+  getMovies,
+  addMovie,
+  editMovie,
+  deleteMovie,
+  getMovie,
+} from "./services";
 
+export const getMovieError = (err: string): MoviesAction => ({
+  type: actionTypes.GET_MOVIE_ERROR,
+  payload: err,
+});
+export const getMovieLoading = (): MoviesAction => ({
+  type: actionTypes.GET_MOVIE_LOADING,
+});
 export const deleteMovieError = (err: string): MoviesAction => ({
   type: actionTypes.DELETE_MOVIE_ERROR,
   payload: err,
@@ -89,6 +102,23 @@ export const deleteMovieRequest = (movieVal: any) => (
     .catch((error) => {
       alert(error.message.toString());
       deleteMovieError(error.toString());
+    });
+};
+export const setMovie = (movieData: IMovie): any => ({
+  type: actionTypes.SET_MOVIE,
+  movieData,
+});
+export const getMovieRequest = (id: number) => (
+  dispatch: any
+): Promise<void> => {
+  getMovieLoading();
+  return getMovie(id)
+    .then((response) => {
+      dispatch(setMovie(response.data));
+    })
+    .catch((error) => {
+      alert(error.message.toString());
+      getMovieError(error.toString());
     });
 };
 export const setMoviesSearch = (search: string): MoviesAction => ({

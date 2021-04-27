@@ -22,6 +22,7 @@ type MoviesState = {
   sortOrder: string;
   search: string;
   successMsg: string;
+  movie: IMovie;
 };
 
 type MoviesAction = {

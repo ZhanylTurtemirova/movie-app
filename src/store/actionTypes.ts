@@ -25,3 +25,8 @@ export const REMOVE_MOVIE_ERROR = "REMOVE_MOVIE_ERROR";
 export const SET_MOVIES = "SET_MOVIES";
 export const SET_MOVIES_ERROR = "SET_MOVIES_ERROR";
 export const SET_MOVIES_LOADING = "SET_MOVIES_LOADING";
+
+export const SET_MOVIE = "SET_MOVIE";
+export const GET_MOVIE = "GET_MOVIE";
+export const GET_MOVIE_ERROR = "GET_MOVIE_ERROR";
+export const GET_MOVIE_LOADING = "GET_MOVIE_LOADING";

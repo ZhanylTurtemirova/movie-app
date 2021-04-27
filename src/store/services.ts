@@ -14,3 +14,6 @@ export const addMovie = (movie: Record<string, any>): Promise<AxiosResponse> =>
 
 export const editMovie = (movie: Record<string, any>): Promise<AxiosResponse> =>
   api.put(BASE_API, movie);
+
+export const getMovie = (id: number): Promise<AxiosResponse> =>
+  api.get(`${BASE_API}/${id}`);

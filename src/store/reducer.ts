@@ -24,6 +24,20 @@ const initialState: MoviesState = {
   error: "",
   search: "",
   successMsg: "",
+  movie: {
+    id: 1,
+    title: "",
+    tagline: "No tagline",
+    vote_average: 1,
+    vote_count: 1,
+    release_date: "",
+    poster_path: "",
+    overview: "No overview",
+    budget: 1,
+    revenue: 1,
+    genres: ["", ""],
+    runtime: 0,
+  },
 };
 
 const reducer = (
@@ -147,6 +161,27 @@ const reducer = (
         ...state,
         isLoading: true,
         successMsg: "The movie has been edited successfully",
+      };
+    case actionTypes.GET_MOVIE_LOADING:
+      return {
+        ...state,
+        isLoading: true,
+        error: "",
+      };
+    case actionTypes.GET_MOVIE_ERROR:
+      return {
+        ...state,
+        error:
+          action?.payload && typeof action.payload === "string"
+            ? action.payload
+            : "",
+      };
+    case actionTypes.SET_MOVIE:
+      return {
+        ...state,
+        movie: action.payload || initialState.movie,
+        isLoading: false,
+        error: "",
       };
   }
   return state;
