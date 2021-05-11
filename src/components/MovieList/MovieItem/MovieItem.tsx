@@ -18,23 +18,12 @@ import AddMovieContainer from "../../AddMovie";
 import DeleteMovieContainer from "../../DeleteMovie";
 
 interface MovieItemInterface {
-  movie: {
-    id: number;
-    title: string;
-    tagline: string;
-    vote_average: number;
-    vote_count: number;
-    release_date: string;
-    poster_path: string;
-    overview: string;
-    budget: number;
-    revenue: number;
-    genres: string[];
-    runtime: number;
-  };
+  movie: IMovie;
+  onClickProps: () => void;
 }
 
 const MovieItem: FC<React.PropsWithChildren<MovieItemInterface>> = ({
+  onClickProps,
   movie,
   movie: { poster_path, title, genres, release_date },
 }): ReactElement => {
@@ -44,7 +33,7 @@ const MovieItem: FC<React.PropsWithChildren<MovieItemInterface>> = ({
 
   return (
     <>
-      <MovieWrapper>
+      <MovieWrapper onClick={onClickProps}>
         <MovieMenuWrapper>
           <MovieMenu onClick={() => setIsMenuShown(true)}>
             <MovieMenuIcon src={menuImg} />

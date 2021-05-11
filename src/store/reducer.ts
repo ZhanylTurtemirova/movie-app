@@ -179,7 +179,12 @@ const reducer = (
     case actionTypes.SET_MOVIE:
       return {
         ...state,
-        movie: action.payload || initialState.movie,
+        movie:
+          action?.payload &&
+          typeof action.payload !== "string" &&
+          !Array.isArray(action.payload)
+            ? action.payload
+            : initialState.movie,
         isLoading: false,
         error: "",
       };

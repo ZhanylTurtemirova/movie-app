@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from "react";
 import MovieItem from "./MovieItem/MovieItem";
 import { ListWrapper, ResultWrapper } from "./MovieList.styles";
+import { useHistory } from "react-router-dom";
 
 interface MovieListInterface {
   movies: IMovie[];
@@ -28,7 +29,11 @@ const MovieList: FC<MovieListInterface> = ({
   useEffect(() => {
     getMoviesRequest({ filter, sortBy, sortOrder, searchBy: "title", search });
   }, [filter, getMoviesRequest, sortBy, sortOrder, search]);
+  let history = useHistory();
 
+  const onClickHandler = (id: number) => {
+    history.push(`/movies/${id}`);
+  };
   if (!movies || movies.length === 0) {
     return <div>No movies found</div>;
   }
@@ -44,7 +49,14 @@ const MovieList: FC<MovieListInterface> = ({
       <ResultWrapper>{movies.length || 0} movies found </ResultWrapper>
       <ListWrapper>
         {Array.isArray(movies) &&
-          movies.map((item) => <MovieItem movie={item} />)}
+          movies.map((item) => (
+            // <div key={item.id} onClick={() => onClickHandler(item.id)}>
+            <MovieItem
+              movie={item}
+              onClickProps={() => onClickHandler(item.id)}
+            />
+            // </div>
+          ))}
       </ListWrapper>
     </>
   );

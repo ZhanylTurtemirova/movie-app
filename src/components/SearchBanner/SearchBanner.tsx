@@ -14,7 +14,6 @@ import {
 } from "./styles/SearchBanner.styles";
 import Logo from "../Logo";
 import AddMovieContainer from "../AddMovie";
-import { useHistory } from "react-router-dom";
 
 interface SearchBannerProps {
   search: string;

@@ -9,3 +9,6 @@ export const selectSortOrder = ({ sortOrder }: any): string => sortOrder;
 export const selectSearchValue = ({ search }: any): string => search;
 export const selectSuccessMsg = ({ successMsg }: any): string => successMsg;
 export const selectMovie = ({ movie }: any): IMovie => movie;
+// export const selectMovieById = (state: any[], id: any) => {
+//   return state.movies.filter((item: { id: any }) => item.id === id);
+// };
