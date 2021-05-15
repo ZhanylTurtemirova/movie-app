@@ -45,82 +45,84 @@ export const editMovieSuccess = (): MoviesAction => ({
   type: actionTypes.EDIT_MOVIE_SUCCESS,
 });
 
-export const addMovieRequest = (movieVal: any) => (
-  dispatch: any
-): Promise<void> => {
-  const movie = {
-    vote_average: 0,
-    vote_count: 9,
-    budget: 0,
-    revenue: 0,
-    ...movieVal,
+export const addMovieRequest =
+  (movieVal: any) =>
+  (dispatch: any): Promise<void> => {
+    const movie = {
+      vote_average: 0,
+      vote_count: 9,
+      budget: 0,
+      revenue: 0,
+      ...movieVal,
+    };
+    addMovieLoading();
+    return addMovie(movie)
+      .then(() => {
+        alert("Successfully added!");
+        addMovieSuccess();
+        dispatch(getMoviesRequest());
+      })
+      .catch((error) => {
+        alert(error.message.toString());
+        addMovieError(error.toString());
+      });
   };
-  addMovieLoading();
-  return addMovie(movie)
-    .then(() => {
-      alert("Successfully added!");
-      addMovieSuccess();
-      dispatch(getMoviesRequest());
-    })
-    .catch((error) => {
-      alert(error.message.toString());
-      addMovieError(error.toString());
-    });
-};
-export const editMovieRequest = (movieVal: any) => (
-  dispatch: any
-): Promise<void> => {
-  const movie = {
-    vote_average: 0,
-    vote_count: 9,
-    budget: 0,
-    revenue: 0,
-    ...movieVal,
+export const editMovieRequest =
+  (movieVal: any) =>
+  (dispatch: any): Promise<void> => {
+    const movie = {
+      vote_average: 0,
+      vote_count: 9,
+      budget: 0,
+      revenue: 0,
+      ...movieVal,
+    };
+    editMovieLoading();
+    return editMovie(movie)
+      .then(() => {
+        alert("Successfully edited!");
+        editMovieSuccess();
+        dispatch(getMoviesRequest());
+      })
+      .catch((error) => {
+        alert(error.message.toString());
+        editMovieError(error.toString());
+      });
   };
-  editMovieLoading();
-  return editMovie(movie)
-    .then(() => {
-      alert("Successfully edited!");
-      editMovieSuccess();
-      dispatch(getMoviesRequest());
-    })
-    .catch((error) => {
-      alert(error.message.toString());
-      editMovieError(error.toString());
-    });
+export const deleteMovieRequest =
+  (movieVal: any) =>
+  (dispatch: any): Promise<void> => {
+    deleteMovieLoading();
+    return deleteMovie(movieVal)
+      .then(() => {
+        alert("Successfully delited!");
+        deleteMovieSuccess();
+        dispatch(getMoviesRequest());
+      })
+      .catch((error) => {
+        alert(error.message.toString());
+        deleteMovieError(error.toString());
+      });
+  };
+export const setMovie = (movieData: IMovie): any => {
+  return {
+    type: actionTypes.SET_MOVIE,
+    payload: movieData,
+  };
 };
-export const deleteMovieRequest = (movieVal: any) => (
-  dispatch: any
-): Promise<void> => {
-  deleteMovieLoading();
-  return deleteMovie(movieVal)
-    .then(() => {
-      alert("Successfully delited!");
-      deleteMovieSuccess();
-      dispatch(getMoviesRequest());
-    })
-    .catch((error) => {
-      alert(error.message.toString());
-      deleteMovieError(error.toString());
-    });
-};
-export const setMovie = (movieData: IMovie): any => ({
-  type: actionTypes.SET_MOVIE,
-  movieData,
-});
-export const getMovieRequest = (id: number) => (
-  dispatch: any
-): Promise<void> => {
-  getMovieLoading();
-  return getMovie(id)
-    .then((response) => {
-      dispatch(setMovie(response.data));
-    })
-    .catch((error) => {
-      alert(error.message.toString());
-      getMovieError(error.toString());
-    });
-};
+export const getMovieRequest =
+  (id: number) =>
+  (dispatch: any): Promise<void> => {
+    getMovieLoading();
+    return getMovie(id)
+      .then((response) => {
+        dispatch(setMovie(response.data));
+      })
+      .catch((error) => {
+        alert(error.message.toString());
+        getMovieError(error.toString());
+      });
+  };
 export const setMoviesSearch = (search: string): MoviesAction => ({
   type: actionTypes.SET_MOVIES_SEARCH,
   payload: search,
@@ -151,20 +153,20 @@ export const setMovies = (movies: { data: IMovie[] }): MoviesAction => {
   };
 };
 
-export const getMoviesRequest = (params?: any) => (
-  dispatch: any
-): Promise<void> => {
-  dispatch(getMoviesLoading());
-  const queryParams = {
-    limit: 100,
-    ...params,
-  };
+export const getMoviesRequest =
+  (params?: any) =>
+  (dispatch: any): Promise<void> => {
+    dispatch(getMoviesLoading());
+    const queryParams = {
+      limit: 100,
+      ...params,
+    };
 
-  return getMovies(queryParams)
-    .then((response) => {
-      dispatch(setMovies(response.data));
-    })
-    .catch((error: any) => {
-      dispatch(getMoviesError(error.toString()));
-    });
-};
+    return getMovies(queryParams)
+      .then((response) => {
+        dispatch(setMovies(response.data));
+      })
+      .catch((error: any) => {
+        dispatch(getMoviesError(error.toString()));
+      });
+  };

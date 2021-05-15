@@ -1,10 +1,5 @@
 import { connect } from "react-redux";
-import {
-  selectError,
-  selectLoading,
-  selectMovie,
-  // selectMovieById,
-} from "../../store/selectors";
+import { selectError, selectLoading, selectMovie } from "../../store/selectors";
 import { getMovieRequest } from "../../store/actionCreators";
 import MovieDetail from "./MovieDetail";
 

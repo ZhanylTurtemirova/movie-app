@@ -8,7 +8,7 @@ import {
   selectSortOrder,
   selectSearchValue,
 } from "../../store/selectors";
-import { getMoviesRequest } from "../../store/actionCreators";
+import { getMoviesRequest, getMovieRequest } from "../../store/actionCreators";
 import MovieList from "./MovieList";
 
 export const MovieListContainer = connect(
@@ -23,6 +23,7 @@ export const MovieListContainer = connect(
   }),
   {
     getMoviesRequest,
+    getMovieRequest,
   }
 )(MovieList);
 

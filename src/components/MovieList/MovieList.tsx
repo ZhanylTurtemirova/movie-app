@@ -14,10 +14,12 @@ interface MovieListInterface {
   getMoviesRequest: (
     params?: Record<string, string | number | boolean> | undefined
   ) => Promise<void>;
+  getMovieRequest: any;
 }
 
 const MovieList: FC<MovieListInterface> = ({
   getMoviesRequest,
+  getMovieRequest,
   movies,
   error,
   filter,
@@ -32,6 +34,7 @@ const MovieList: FC<MovieListInterface> = ({
   let history = useHistory();
 
   const onClickHandler = (id: number) => {
+    getMovieRequest(id);
     history.push(`/movies/${id}`);
   };
   if (!movies || movies.length === 0) {
@@ -50,12 +53,10 @@ const MovieList: FC<MovieListInterface> = ({
       <ListWrapper>
         {Array.isArray(movies) &&
           movies.map((item) => (
-            // <div key={item.id} onClick={() => onClickHandler(item.id)}>
             <MovieItem
               movie={item}
               onClickProps={() => onClickHandler(item.id)}
             />
-            // </div>
           ))}
       </ListWrapper>
     </>

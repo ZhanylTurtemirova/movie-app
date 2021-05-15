@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useEffect } from "react";
+import React, { FC, ReactElement, useEffect, useState } from "react";
 import {
   MovieWrapper,
   MoviePoster,
@@ -20,33 +20,25 @@ import {
 } from "./MovieDetail.styles";
 import searchImg from "../../assets/red-search.webp";
 import Logo from "../Logo";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 type MovieDetailProp = {
   movie: IMovie;
   error: string;
   isLoading: boolean;
-  getMovieRequest: (id: number) => void;
 };
 
 const MovieDetail: FC<React.PropsWithChildren<MovieDetailProp>> = ({
-  movie,
+  movie: movieProp,
   error,
   isLoading,
-  getMovieRequest,
 }): ReactElement => {
-  const history = useHistory();
-
+  const [movie, setMovie] = useState(movieProp);
   const { id }: Record<string, string> = useParams();
 
   useEffect(() => {
-    (async () => {
-      getMovieRequest(Number(id));
-      if (error) {
-        history.push("/");
-      }
-    })();
-  }, [error, getMovieRequest, history, id]);
+    setMovie(movieProp);
+  }, [movieProp, id]);
 
   if (isLoading) {
     return <div>loading</div>;
@@ -66,17 +58,18 @@ const MovieDetail: FC<React.PropsWithChildren<MovieDetailProp>> = ({
           </SearchWrapper>
         </TopWrapper>
         <MovieWrapper>
-          <MoviePoster src={movie.poster_path} />
+          <MoviePoster src={movie?.poster_path || ""} />
           <MovieDescription>
             <MovieTilte>
-              <Title>{movie.title}</Title>
-              <Rate>{movie.vote_average}</Rate>
+              <Title>{movie?.title || ""}</Title>
+              <Rate>{movie?.vote_average || 0}</Rate>
             </MovieTilte>
-            <MovieSubtitle>{movie.tagline}</MovieSubtitle>
+            <MovieSubtitle>{movie?.tagline || ""}</MovieSubtitle>
             <MovieDateTime>
-              <Date>{movie.release_date}</Date> <Time>{movie.runtime}</Time>
+              <Date>{movie?.release_date || ""}</Date>{" "}
+              <Time>{movie?.runtime || 0}</Time>
             </MovieDateTime>
-            <MovieOverview>{movie.overview}</MovieOverview>
+            <MovieOverview>{movie?.overview || ""}</MovieOverview>
           </MovieDescription>
         </MovieWrapper>
       </MovieContent>

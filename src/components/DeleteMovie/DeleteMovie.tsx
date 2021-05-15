@@ -16,7 +16,6 @@ export const DeleteMovie: FC<DeleteMovieProps> = ({
   deleteMovieRequest,
 }): ReactElement => {
   const handleClick = () => {
-    console.log("VVVV", movieId);
     deleteMovieRequest(movieId);
     handleClose();
   };
