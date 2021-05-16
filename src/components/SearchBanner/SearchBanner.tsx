@@ -14,6 +14,7 @@ import {
 } from "./styles/SearchBanner.styles";
 import Logo from "../Logo";
 import AddMovieContainer from "../AddMovie";
+import { useHistory } from "react-router-dom";
 
 interface SearchBannerProps {
   search: string;
@@ -28,9 +29,14 @@ export const SearchBanner: FC<SearchBannerProps> = ({
   const searchInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
-
+  let history = useHistory();
   const searchClickHandler = (e: any) => {
     e.preventDefault();
+    if (searchValue) {
+      history.push(`/search?search=${searchValue}`);
+    } else {
+      history.push("/");
+    }
     setMoviesSearch(searchValue);
   };
 

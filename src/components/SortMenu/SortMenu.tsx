@@ -13,7 +13,7 @@ import {
   TriangleDownButtonWrapper,
   TriangleUpButtonWrapper,
 } from "./styles/SortMenu.styles";
-
+import { useHistory } from "react-router-dom";
 interface SortMenuProps {
   filter: string;
   sortBy: string;
@@ -40,9 +40,15 @@ export const SortMenu: FC<SortMenuProps> = ({
   const [sortedOption, setSortedOption] = useState<string>(sortItems[0]);
   const [isShowed, setIsShowed] = useState<boolean>(false);
   const [sortOrder, setSortOrder] = useState<string>("desc");
+  const history = useHistory();
   const activeClickHandler = (item: string) => {
     setMoviesFilter(item);
     setActiveItem(item);
+    if (item) {
+      history.push(`/search?search=${item}`);
+    } else {
+      history.push("/");
+    }
   };
   const setSortedHandler = (item: string) => {
     setMoviesSortBy(item);

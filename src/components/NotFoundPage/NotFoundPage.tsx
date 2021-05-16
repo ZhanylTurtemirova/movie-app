@@ -1,6 +1,11 @@
 import React, { FC } from "react";
 
-import { Wrapper, PageImg, PageTitle } from "./NotFoundPage.style";
+import {
+  ContentWrapper,
+  Wrapper,
+  PageImg,
+  PageTitle,
+} from "./NotFoundPage.style";
 import Logo from "../Logo";
 import notFound from "../../assets/notFound.png";
 import Footer from "../Footer";
@@ -13,9 +18,11 @@ const NotFoundPage: FC = (): React.ReactElement => {
   return (
     <Wrapper>
       <Logo />
-      <PageTitle>Page Not Found</PageTitle>
-      <PageImg src={notFound} />
-      <Button text="Go back" onClick={() => history.push("/")} />
+      <ContentWrapper>
+        <PageTitle>Page Not Found</PageTitle>
+        <PageImg src={notFound} />
+        <Button text="Go back" onClick={() => history.push("/")} />
+      </ContentWrapper>
       <Footer />
     </Wrapper>
   );
