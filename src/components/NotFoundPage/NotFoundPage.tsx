@@ -5,11 +5,11 @@ import {
   Wrapper,
   PageImg,
   PageTitle,
+  StyledButton,
 } from "./NotFoundPage.style";
 import Logo from "../Logo";
 import notFound from "../../assets/notFound.png";
 import Footer from "../Footer";
-import Button from "../Button";
 import { useHistory } from "react-router-dom";
 
 const NotFoundPage: FC = (): React.ReactElement => {
@@ -21,7 +21,7 @@ const NotFoundPage: FC = (): React.ReactElement => {
       <ContentWrapper>
         <PageTitle>Page Not Found</PageTitle>
         <PageImg src={notFound} />
-        <Button text="Go back" onClick={() => history.push("/")} />
+        <StyledButton onClick={() => history.push("/")}>Go back</StyledButton>
       </ContentWrapper>
       <Footer />
     </Wrapper>
