@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes";
 
-const initialState: MoviesState = {
+export const initialState: MoviesState = {
   movies: [
     {
       id: 1,
