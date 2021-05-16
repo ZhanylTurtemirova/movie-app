@@ -21,7 +21,9 @@ const NotFoundPage: FC = (): React.ReactElement => {
       <ContentWrapper>
         <PageTitle>Page Not Found</PageTitle>
         <PageImg src={notFound} />
-        <StyledButton onClick={() => history.push("/")}>Go back</StyledButton>
+        <StyledButton data-testid="backBtn" onClick={() => history.push("/")}>
+          Go back
+        </StyledButton>
       </ContentWrapper>
       <Footer />
     </Wrapper>

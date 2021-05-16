@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFoundPage should render 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gsDJrp elmpvz"
+  >
+    <div>
+      <span
+        class="sc-gKckTs daCzoc"
+      >
+        netflix
+      </span>
+      <span
+        class="sc-jRQAMF fYDzkP"
+      >
+        roulette
+      </span>
+    </div>
+    <div
+      class="sc-bdvvaa jKKvaL"
+    >
+      <h1
+        class="sc-dkPtyc fUjyaa"
+      >
+        Page Not Found
+      </h1>
+      <img
+        class="sc-hKwCoD cQBGXu"
+        src="notFound.png"
+      />
+      <button
+        class="sc-eCImvq bytteG"
+        data-testid="backBtn"
+      >
+        Go back
+      </button>
+    </div>
+    <div
+      class="sc-iCfLBT dDymkj"
+    >
+      <div>
+        <span
+          class="sc-gKckTs daCzoc"
+        >
+          netflix
+        </span>
+        <span
+          class="sc-jRQAMF fYDzkP"
+        >
+          roulette
+        </span>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
