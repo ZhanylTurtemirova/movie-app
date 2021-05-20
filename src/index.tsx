@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import store from "../src/store";
 import { Provider } from "react-redux";
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <Provider store={store}>
     <App />
   </Provider>,
